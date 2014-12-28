@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Merry Christmas</title>
+
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://cdn.firebase.com/js/client/2.0.6/firebase.js"></script>
+  <script src="./shake.js"></script>
+
+  <style>
+
+  @import url(https://fonts.googleapis.com/css?family=Lobster);
+
+  body{
+    height: 100%;
+    margin: 0px;
+    background: #730000;
+  }
+
+  h1{
+    color: #fff;
+    font-size: 4em;
+    text-align: center;
+    font-family: 'Lobster', cursive;
+  }
+
+  p {
+    color: #fff;
+    font-size: 4em;
+    text-align: center;
+    font-family: 'Lobster', cursive;
+  }
+
+  label {
+    color: #fff;
+    font-size: 2em;
+    text-align: center;
+    font-family: 'Lobster', cursive;
+    margin-right: 2px;
+  }
+
+  a {
+    color: #fff;
+    font-size: 4em;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Lobster', cursive;
+  }
+
+  .hidden{
+    display: none;
+  }
+
+  </style>
+
+</head>
+
+<body>
+
+  <h1>Merry Christmas</h1>
+  <div align="center" id="inputcode">
+    <label for="coderef">Code</label>
+    <input type="text" id="coderef" name="coderef"></input><br />
+    <a href="#" id="go">Go</a>
+  </div>
+  <p class="shakeit hidden">Shake it!</p>
+
+  <script>
+    $(document).ready(function() {
+
+      $('#go').on('click', function(e){
+        e.preventDefault();
+        $('#inputcode').hide();
+        $('.shakeit').show();
+        shakeit();
+      });
+
+      $(".shakeit").on('click', function() {
+        shakeEventDidOccur();
+      });
+
+      function shakeit() {
+        var myShakeEvent = new Shake({
+          threshold: 10
+        });
+        myShakeEvent.start();
+        window.addEventListener('shake', shakeEventDidOccur, false);
+      }
+
+      function shakeEventDidOccur() {
+        var fbref = new Firebase("https://blistering-heat-1679.firebaseio.com/");
+        var coderef = $('#coderef').val();
+        new_record = {};
+        new_record["coderef"] = coderef;
+        fbref.push(new_record);
+      }
+
+    })
+  </script>
+</body>
+
+</html>
