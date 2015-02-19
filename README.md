@@ -6,7 +6,7 @@ The desired effect is that your browser send you code that you can enter on your
 
 ## Demo
 
-[Try this on your browser and prepare your mobile next to you](https://blistering-heat-1679.firebaseio.com/web)
+[Try this on your browser and prepare your mobile next to you](https://blistering-heat-1679.firebaseapp.com/web/)
 
 ## Resources
 
